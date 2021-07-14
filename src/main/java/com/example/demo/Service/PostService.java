@@ -50,13 +50,13 @@ public class PostService {
 		}
 		return new ResponseEntity<>(returnJsonString(false, "Post NotCreated"), HttpStatus.FORBIDDEN);
 	}
-//	public ResponseEntity<?> getpostbyEmail(String email) throws JSONException {
-//		PostModel post= postRepository.findByEmail(email);
-//		if(post !=null) {
-//			return new ResponseEntity<>(post,HttpStatus.OK);
-//		}
-//		return new ResponseEntity<>(returnJsonString(false, "Post NotCreated"), HttpStatus.FORBIDDEN);
-//	}
+	public ResponseEntity<?> getpostbyEmail(String email) throws JSONException {
+		PostModel post= postRepository.findByEmail(email);
+		if(post !=null) {
+			return new ResponseEntity<>(post,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(returnJsonString(false, "Post NotCreated"), HttpStatus.FORBIDDEN);
+	}
 
 	public ResponseEntity<?> updatebyId(PostModel post, long id) throws JSONException{
 		PostModel exist = postRepository.findById(id).orElse(null);

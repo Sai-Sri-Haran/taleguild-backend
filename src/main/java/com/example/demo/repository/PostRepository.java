@@ -9,5 +9,5 @@ import com.example.demo.model.PostModel;
 
 @Repository
 public interface PostRepository extends JpaRepository<PostModel, Long>{
-//	PostModel findByEmail(String Email);
+	PostModel findByEmail(String email);
 }
