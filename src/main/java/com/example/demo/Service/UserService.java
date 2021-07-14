@@ -41,7 +41,7 @@ public class UserService {
 			  if(res_data.getPassword().equals(user.getPassword())){
 				  jsonObject.put("email", user.getEmail());
 				  jsonObject.put("username",res_data.getUsername());
-			  return new ResponseEntity<>(returnJsonString(true, "Login Success",jsonObject),
+			  return new ResponseEntity<>(returnJsonString(true, "Login Success",jsonObject.toString()),
 	                  HttpStatus.OK);
 		  }
 			  return new ResponseEntity<>(returnJsonString(false, "Login Failed","null"),
@@ -49,7 +49,7 @@ public class UserService {
 			  
 	}
 }
-	public String returnJsonString(boolean status, String response,Object cred) throws JSONException {
+	public String returnJsonString(boolean status, String response,String cred) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", status);
         jsonObject.put("message", response);
