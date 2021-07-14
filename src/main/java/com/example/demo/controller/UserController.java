@@ -28,5 +28,4 @@ public class UserController {
 		return userService.loginUser(user);
 	}
 	
-	
 }
