@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Service.PostService;
-import com.example.demo.model.LikeModel;
 import com.example.demo.model.PostModel;
 import com.example.demo.repository.PostRepository;
 
@@ -55,13 +54,6 @@ public class PostController {
 	@RequestMapping(value="/deletebyid/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<?> deletebyId(@PathVariable long id) throws JSONException{
 		return postService.deletebyId(id);
-	}
-	
-	
-	@RequestMapping(value = "/updatelike/{id}",method = RequestMethod.PUT)
- 	public ResponseEntity<?> updatelikebyId(@RequestBody LikeModel like, @PathVariable long id) throws JSONException{
-		return postService.updatebylike(like.getPostlike(), id);
-		//return null;
 	}
 	
 	@RequestMapping(value = "/updatebyid/{id}",method = RequestMethod.PUT)
