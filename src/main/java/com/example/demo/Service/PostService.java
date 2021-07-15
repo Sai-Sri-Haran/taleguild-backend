@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import org.codehaus.jettison.json.JSONException;
+
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,17 +51,18 @@ public class PostService {
 		}
 		return new ResponseEntity<>(returnJsonString(false, "Post NotCreated"), HttpStatus.FORBIDDEN);
 	}
+
 	public ResponseEntity<?> getpostbyEmail(String email) throws JSONException {
-		PostModel post= postRepository.findByEmail(email);
-		if(post !=null) {
-			return new ResponseEntity<>(post,HttpStatus.OK);
+		PostModel post = postRepository.findByEmail(email);
+		if (post != null) {
+			return new ResponseEntity<>(post, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(returnJsonString(false, "Post NotCreated"), HttpStatus.FORBIDDEN);
 	}
 
-	public ResponseEntity<?> updatebyId(PostModel post, long id) throws JSONException{
+	public ResponseEntity<?> updatebyId(PostModel post, long id) throws JSONException {
 		PostModel exist = postRepository.findById(id).orElse(null);
-		if(exist !=null) {
+		if (exist != null) {
 			exist.setEmail(post.getEmail());
 			exist.setPostcategory(post.getPostcategory());
 			exist.setPostcontent(post.getPostcontent());
@@ -71,5 +73,20 @@ public class PostService {
 			return new ResponseEntity<>(postRepository.save(exist), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(returnJsonString(false, "user Not found"), HttpStatus.OK);
+	}
+
+	public ResponseEntity<?> updatebylike(int like, long id) throws JSONException {
+		if (like > 0) {
+			PostModel post = postRepository.findById(id).orElse(null);
+			if (post != null) {
+				post.setpostLike(like);
+				System.out.print(post.getpostLike());
+				postRepository.save(post);
+				return new ResponseEntity<>(like, HttpStatus.OK);
+			}
+
+		}
+		return new ResponseEntity<>(returnJsonString(false, "Like Not Updated"), HttpStatus.FORBIDDEN);
+
 	}
 }
